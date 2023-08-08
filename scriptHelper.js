@@ -27,21 +27,33 @@ function validateInput(string) {
 }
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-    let document = window.document;
-    let pilot = document.getElementById("pilotName");
-    let copilot = document.getElementById("copilotName");
-    let fuelLevel = document.getElementById("fuelLevel");
-    let cargoLevel = document.getElementById("cargoMass");
+    // let document = window.document;
+    let pilotStatus = document.getElementById("pilotStatus");
+    let copilotStatus = document.getElementById("copilotStatus");
+    let fuelLevelCurrent = document.getElementById("fuelStatus");
+    let cargoLevelCurrent = document.getElementById("cargoStatus");
 
 
-    if (validateInput(pilot) === "" || validateInput(copilot) === "") {
+    if (validateInput(pilot) === "Empty" || validateInput(copilot) === "Empty" || validateInput(fuelLevel) === "Empty" || validateInput(cargoLevel) === "Empty") {
         alert("All fields are required!");
     } else if (validateInput(pilot) === "Is a Number" || validateInput(copilot) === "Is a Number") {
         alert("Make sure to enter valid information for each field!");
-    } else if (validateInput(fuelLevel) === "" || validateInput(cargoLevel) === "") {
-        alert("All fields are required!");
     } else if (validateInput(fuelLevel) === "Not a Number" || validateInput(cargoLevel) === "Not a Number") {
         alert("Make sure to enter valid information for each field!");
+    } else {
+        list.style.visibility = "visible";
+        pilotStatus.innerHTML = `Pilot ${pilot} Ready`;
+        copilotStatus.innerHTML = `Copilot ${copilot} Ready`;
+        fuelLevel < 10000 ? (
+            document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch",
+            document.getElementById("launchStatus").style.color = "#C7254E"
+        ) : cargoLevel > 10000 ? (
+            document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch",
+            document.getElementById("launchStatus").style.color = "#C7254E"
+        ) : (
+            document.getElementById("launchStatus").innerHTML = "Shuttle is ready for launch",
+            document.getElementById("launchStatus").style.color = "#419F6A"
+        );
     }
 
     // form.addEventListener("submit", event => {
