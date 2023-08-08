@@ -1,6 +1,8 @@
 // Write your JavaScript code here!
 // import { addDestinationInfo, validateInput, formSubmission, pickPlanet, myFetch } from "./scriptHelper";
 
+const { myFetch } = require("./scriptHelper");
+
 window.addEventListener("load", function () {
     let form = document.querySelector("form");
     let list = document.querySelector("#faultyItems")
