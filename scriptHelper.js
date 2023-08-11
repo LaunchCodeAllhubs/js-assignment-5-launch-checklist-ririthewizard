@@ -47,10 +47,12 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
         copilotStatus.innerHTML = `Copilot ${copilot} Ready`;
         fuelLevel < 10000 ? (
             document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch",
-            document.getElementById("launchStatus").style.color = "#C7254E"
+            document.getElementById("launchStatus").style.color = "#C7254E",
+            fuelLevelCurrent.innerHTML = "Fuel level too low for launch"
         ) : cargoLevel > 10000 ? (
             document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch",
-            document.getElementById("launchStatus").style.color = "#C7254E"
+            document.getElementById("launchStatus").style.color = "#C7254E",
+            cargoLevelCurrent.innerHTML = "Cargo mass too high for launch"
         ) : (
             document.getElementById("launchStatus").innerHTML = "Shuttle is ready for launch",
             document.getElementById("launchStatus").style.color = "#419F6A"
@@ -69,19 +71,16 @@ async function myFetch() {
     let planetsReturned;
 
     planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then(function (response) {
-        response.json().then(function(data) {
-            console.log(data);
-        })
+        return response.json();
     });
 
     return planetsReturned;
 }
 
 function pickPlanet(planets) {
-    planets = myFetch();
-    return planets[2];
+    let randomPlanet = Math.floor(Math.random() * planets.length);
+    return planets[randomPlanet];
 }
-
 module.exports.addDestinationInfo = addDestinationInfo;
 module.exports.validateInput = validateInput;
 module.exports.formSubmission = formSubmission;
